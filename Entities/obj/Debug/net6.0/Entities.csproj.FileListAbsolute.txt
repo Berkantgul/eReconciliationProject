@@ -1,0 +1,15 @@
+D:\eReconciliationProject\Entities\bin\Debug\net6.0\Entities.deps.json
+D:\eReconciliationProject\Entities\bin\Debug\net6.0\Entities.dll
+D:\eReconciliationProject\Entities\bin\Debug\net6.0\Entities.pdb
+D:\eReconciliationProject\Entities\bin\Debug\net6.0\Core.dll
+D:\eReconciliationProject\Entities\bin\Debug\net6.0\Core.pdb
+D:\eReconciliationProject\Entities\obj\Debug\net6.0\Entities.csproj.AssemblyReference.cache
+D:\eReconciliationProject\Entities\obj\Debug\net6.0\Entities.GeneratedMSBuildEditorConfig.editorconfig
+D:\eReconciliationProject\Entities\obj\Debug\net6.0\Entities.AssemblyInfoInputs.cache
+D:\eReconciliationProject\Entities\obj\Debug\net6.0\Entities.AssemblyInfo.cs
+D:\eReconciliationProject\Entities\obj\Debug\net6.0\Entities.csproj.CoreCompileInputs.cache
+D:\eReconciliationProject\Entities\obj\Debug\net6.0\Entities.csproj.CopyComplete
+D:\eReconciliationProject\Entities\obj\Debug\net6.0\Entities.dll
+D:\eReconciliationProject\Entities\obj\Debug\net6.0\refint\Entities.dll
+D:\eReconciliationProject\Entities\obj\Debug\net6.0\Entities.pdb
+D:\eReconciliationProject\Entities\obj\Debug\net6.0\ref\Entities.dll
