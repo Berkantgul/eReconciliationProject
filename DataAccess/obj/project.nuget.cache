@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "CHJTCmFwaWMIrMnBP4whqx5kKE2VWGf4dvQszh4ahFn2J+mKuMhQm8ZEDDGow9686gFmxDMhS+uf/94sSHxIZw==",
+  "dgSpecHash": "LTtC5jpKvJ5q3yr4mLPXURk333p4AYRL78DCghW7o8UYEaF1ensrPmq91/Fd5MucSSbtJp70GtAY2613MywLxA==",
   "success": true,
   "projectFilePath": "D:\\eReconciliationProject\\DataAccess\\DataAccess.csproj",
   "expectedPackageFiles": [
@@ -15,6 +15,7 @@
     "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\6.0.0\\microsoft.extensions.caching.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\microsoft.extensions.caching.memory\\6.0.1\\microsoft.extensions.caching.memory.6.0.1.nupkg.sha512",
     "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\6.0.0\\microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\microsoft.extensions.configuration.binder\\6.0.0\\microsoft.extensions.configuration.binder.6.0.0.nupkg.sha512",
     "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\6.0.1\\microsoft.extensions.dependencyinjection.6.0.1.nupkg.sha512",
     "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\microsoft.extensions.logging\\6.0.0\\microsoft.extensions.logging.6.0.0.nupkg.sha512",

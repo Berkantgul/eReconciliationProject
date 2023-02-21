@@ -10,3 +10,10 @@ D:\eReconciliationProject\Business\obj\Debug\net6.0\Business.dll
 D:\eReconciliationProject\Business\obj\Debug\net6.0\refint\Business.dll
 D:\eReconciliationProject\Business\obj\Debug\net6.0\Business.pdb
 D:\eReconciliationProject\Business\obj\Debug\net6.0\ref\Business.dll
+D:\eReconciliationProject\Business\bin\Debug\net6.0\Core.dll
+D:\eReconciliationProject\Business\bin\Debug\net6.0\DataAccess.dll
+D:\eReconciliationProject\Business\bin\Debug\net6.0\Entities.dll
+D:\eReconciliationProject\Business\bin\Debug\net6.0\DataAccess.pdb
+D:\eReconciliationProject\Business\bin\Debug\net6.0\Entities.pdb
+D:\eReconciliationProject\Business\bin\Debug\net6.0\Core.pdb
+D:\eReconciliationProject\Business\obj\Debug\net6.0\Business.csproj.CopyComplete
