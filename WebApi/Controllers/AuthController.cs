@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Entities.Concrete;
 using Entities.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,15 +18,37 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("register")]
-        public IActionResult Register(UserForRegister userForRegister)
+        public IActionResult Register(UserAndCompanyRegisterDto userAndCompanyRegister)
+        {
+            var userExists = _authService.UserExists(userAndCompanyRegister.userForRegister.Email);
+            if (userExists == null)
+            {
+                return BadRequest(userExists.Message);
+            }
+            var companyExists = _authService.CompanyExists(userAndCompanyRegister.company);
+            if (!companyExists.Success)
+            {
+                return BadRequest(companyExists.Message);
+            }
+            var registerResult = _authService.Register(userAndCompanyRegister.userForRegister, userAndCompanyRegister.userForRegister.Password, userAndCompanyRegister.company);
+            var result = _authService.CreateAccessToken(registerResult.Data, registerResult.Data.CompanyId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(registerResult.Message);
+        }
+
+        [HttpPost("registerSecondAccount")]
+        public IActionResult RegisterSecondAccount(UserForRegisterToSecondAccountDto userForRegister)
         {
             var userExists = _authService.UserExists(userForRegister.Email);
             if (userExists == null)
             {
                 return BadRequest(userExists.Message);
             }
-            var registerResult = _authService.Register(userForRegister, userForRegister.Password);
-            var result = _authService.CreateAccessToken(registerResult.Data, 0);
+            var registerResult = _authService.RegisterSecondAccount(userForRegister, userForRegister.Password, userForRegister.CompanyId);
+            var result = _authService.CreateAccessToken(registerResult.Data, userForRegister.CompanyId);
             if (result.Success)
             {
                 return Ok(result);
@@ -41,12 +64,46 @@ namespace WebApi.Controllers
             {
                 return BadRequest(userToLogin.Message);
             }
-            var result = _authService.CreateAccessToken(userToLogin.Data, 0);
+            if (userToLogin.Data.IsActive)
+            {
+                var userCompany = _authService.GetCompany(userToLogin.Data.Id);
+                var result = _authService.CreateAccessToken(userToLogin.Data, userCompany.Data.CompanyId);
+                if (result.Success)
+                {
+                    return Ok(result);
+                }
+                return BadRequest(result.Message);
+            }
+
+            return BadRequest("Kullanıcınız pasif durumda, aktif etmek için yöneticinizle danışın.");
+        }
+
+        [HttpGet("confirmuser")]
+        public IActionResult ConfirmUser(string value)
+        {
+            var user = _authService.GetByMailConfirmValue(value).Data;
+            user.MailConfirm = true;
+            user.MailConfirmDate = DateTime.Now;
+            var result = _authService.Update(user);
             if (result.Success)
             {
                 return Ok(result);
             }
-            return BadRequest(userToLogin.Message);
+            return BadRequest(result.Message);
         }
+
+        [HttpGet("sendconfirmemail")]
+        public IActionResult SendConfirmEmail(int id)
+        {
+            var user = _authService.GetById(id).Data;
+            var result = _authService.SendConfirmEmail(user);
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result.Message);
+        }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using Core.Utilities.Results.Abstract;
+﻿using Core.Entities;
+using Core.Utilities.Results.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -13,5 +14,8 @@ namespace Business.Abstract
     {
         IResult Add(Company company);
         IDataResult<List<Company>> GetAll();
+        IResult CompanyExists(Company company);
+        IResult UserCompanyAdd(int userId, int companyId);
+        IDataResult<UserCompany> GetCompany(int userId);
     }
 }

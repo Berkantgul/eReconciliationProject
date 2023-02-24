@@ -46,7 +46,18 @@ namespace Business.DependencyResolves.Autofac
 
             builder.RegisterType<AuthManager>().As<IAuthService>();
             builder.RegisterType<JWTHelper>().As<ITokenHelper>();
-            
+
+            builder.RegisterType<MailManager>().As<IMailService>();
+            builder.RegisterType<EfMailDal>().As<IMailDal>();
+
+            builder.RegisterType<MailParameterManager>().As<IMailParameterService>();
+            builder.RegisterType<EfMailParameterDal>().As<IMailParameterDal>();
+
+            builder.RegisterType<MailTemplateManager>().As<IMailTemplateService>();
+            builder.RegisterType<EfMailTemplateDal>().As<IMailTemplateDal>();
+
+
+
 
 
         }

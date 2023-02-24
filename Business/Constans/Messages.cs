@@ -8,12 +8,30 @@ namespace Business.Contans
 {
     public class Messages
     {
-        public static string AddedCompany = "Şirket kaydı başarıyla tamamlandı";
+        // Company
+        public static string AddedCompany = "Şirket kaydı başarıyla tamamlandı"; 
+        public static string CompanyAlreadyExists = "Böyle bir şirket mevcut.";
+
+        // User
         public static string UserNotFound = "Kullanıcı kaydı bulunamadı";
         public static string PasswordError = "Kullanıcı şifre yanlış";
         public static string SuccessfulLogin = "Giriş başarılı";
         public static string UserRegistered = "Kullanıcı eklendi.";
         public static string ExistsAlreadyUser = "Böyle bir kişi zaten mevcut.";
+        public static string ConfirmValue = "Mail onaylama işlemi başarılı.";
+
+        // Mail 
+        public static string MailParameterUpdated = "Mail parametrelerini güncellendi.";
+        public static string MailSendSuccess = "Başarılı bir şekilde mail gönderildi.";
+        public static string MailConfirmSendSuccessfull = "Onay maili tekrar gönderildi.";
+        public static string MailAlreadyConfirm = "Hesabınız zaten onaylı.";
+        public static string MailConfirmationHasNotExpirated = "Hali hazırda onay maili mevcut 5 dakika sonra tekrar deneyin";
+        
+        //Mail Template
+        public static string MailTemplateAdd = "Mail şablonu başarılı bir şekilde eklendi.";
+        public static string RemovedMailTemplate = "Mail şablonu başarılı bir şekilde silindi.";
+        public static string MailTemplateUpdated = "Mail şablonu başarılı bir şekilde güncellendi.";
+
 
     }
 }
