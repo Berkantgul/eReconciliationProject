@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "jef+XZZxtTtdB8hM6yODh1X2/lfhdtitRYIPIr/xyNW+Of7Lbt1XxaIh3gvqxfwC0KHnxlTJsCS8lzOVMjVgJw==",
+  "dgSpecHash": "DBe/x2VPmULMY0ZgKQRTGlxD0S6dFHDx2iL+TAZOOwYAiH+WJqA51rcXN2JHrpW8xeVjTdH+tQEi3HIyePihTw==",
   "success": true,
   "projectFilePath": "D:\\eReconciliationProject\\WebApi\\WebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\autofac\\6.5.0\\autofac.6.5.0.nupkg.sha512",
     "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\autofac.extensions.dependencyinjection\\8.0.0\\autofac.extensions.dependencyinjection.8.0.0.nupkg.sha512",
+    "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\fluentvalidation\\11.5.1\\fluentvalidation.11.5.1.nupkg.sha512",
     "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.0\\microsoft.aspnetcore.authentication.jwtbearer.6.0.0.nupkg.sha512",
     "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",

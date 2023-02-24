@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Contans;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Entities;
 using Core.Utilities.Hashing;
 using Core.Utilities.Results.Abstract;
@@ -92,6 +94,9 @@ namespace Business.Concrete
                 PasswordHash = passworhHash,
                 PasswordSalt = passwordSalt
             };
+
+            ValidationTools.Validate(new UserValidator(), user);
+            ValidationTools.Validate(new CompanyValidator(), company);
             _userService.Add(user);
             _companyService.Add(company);
             _companyService.UserCompanyAdd(user.Id, company.Id);

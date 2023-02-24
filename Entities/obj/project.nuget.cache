@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "8frrqvfnWVVH0fUt8qZlUQJMNloK5Ky5aQqcb3XOcQVyRfgQDbtFJIAw/Ms6W3OfWx1Wv1lj7QtGPcJFJDOJ6g==",
+  "dgSpecHash": "GMtw9jTjrNInmWZV/ufxSMJ14OfQUN8w5xQMK35PRXkUjE2rMvazP8JPcvJOusxHN7VvwViPy/qsTQyapXgt9Q==",
   "success": true,
   "projectFilePath": "D:\\eReconciliationProject\\Entities\\Entities.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\fluentvalidation\\11.5.1\\fluentvalidation.11.5.1.nupkg.sha512",
     "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",

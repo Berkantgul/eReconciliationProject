@@ -74,3 +74,4 @@ D:\eReconciliationProject\WebApi\bin\Debug\net6.0\Core.pdb
 D:\eReconciliationProject\WebApi\bin\Debug\net6.0\DataAccess.pdb
 D:\eReconciliationProject\WebApi\bin\Debug\net6.0\Entities.pdb
 D:\eReconciliationProject\WebApi\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\eReconciliationProject\WebApi\bin\Debug\net6.0\FluentValidation.dll
