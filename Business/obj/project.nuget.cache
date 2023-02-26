@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "NoP/zKGUTSbPD8ESmMFCQIj2/luY+X07YCEHnYfabD18oR5UehuHSDDXXxur8qIjqJF7+qoMVYLnnYYhAnXtuQ==",
+  "dgSpecHash": "VKy2u0Uf2kQm5Fro93jnsR8BVy1jrGpN0GlxkZeOtKkpLzJmR28qLEoqmTEuctZGicSdLTwtuV8UXDU+JKQQCA==",
   "success": true,
   "projectFilePath": "D:\\eReconciliationProject\\Business\\Business.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\autofac\\6.5.0\\autofac.6.5.0.nupkg.sha512",
+    "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\autofac.extras.dynamicproxy\\6.0.1\\autofac.extras.dynamicproxy.6.0.1.nupkg.sha512",
+    "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\fluentvalidation\\11.5.1\\fluentvalidation.11.5.1.nupkg.sha512",
     "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
@@ -36,6 +38,7 @@
     "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",
     "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\system.configuration.configurationmanager\\4.7.0\\system.configuration.configurationmanager.4.7.0.nupkg.sha512",
     "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.0\\system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
+    "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\system.diagnostics.eventlog\\6.0.0\\system.diagnostics.eventlog.6.0.0.nupkg.sha512",
     "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\system.drawing.common\\4.7.0\\system.drawing.common.4.7.0.nupkg.sha512",
     "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\system.identitymodel.tokens.jwt\\6.8.0\\system.identitymodel.tokens.jwt.6.8.0.nupkg.sha512",
     "C:\\Users\\BERKANT GÜL\\.nuget\\packages\\system.runtime.caching\\4.7.0\\system.runtime.caching.4.7.0.nupkg.sha512",

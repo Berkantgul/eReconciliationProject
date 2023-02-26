@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Contans;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Entities;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
@@ -22,6 +24,7 @@ namespace Business.Concrete
             _companyDal = companyDal;
         }
 
+        [ValidationAspect(typeof(CompanyValidator))]
         public IResult Add(Company company)
         {
             _companyDal.Add(company);
@@ -50,9 +53,8 @@ namespace Business.Concrete
 
         public IResult UserCompanyAdd(int userId, int companyId)
         {
-           _companyDal.UserCompanyAdd(userId, companyId);
+            _companyDal.UserCompanyAdd(userId, companyId);
             return new SuccessResult();
         }
     }
 }
-    

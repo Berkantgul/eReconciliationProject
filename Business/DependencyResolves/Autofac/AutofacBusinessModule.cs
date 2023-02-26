@@ -1,6 +1,9 @@
 ﻿using Autofac;
+using Autofac.Extras.DynamicProxy;
 using Business.Abstract;
 using Business.Concrete;
+using Castle.DynamicProxy;
+using Core.Utilities.Interceptions;
 using Core.Utilities.Security.JWT;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
@@ -40,7 +43,7 @@ namespace Business.DependencyResolves.Autofac
 
             builder.RegisterType<MailParameterManager>().As<IMailParameterService>();
             builder.RegisterType<EfMailParameterDal>().As<IMailParameterDal>();
-            
+
             builder.RegisterType<UserManager>().As<IUserService>();
             builder.RegisterType<EfUserDal>().As<IUserDal>();
 
@@ -58,7 +61,12 @@ namespace Business.DependencyResolves.Autofac
 
 
 
-
+            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
+              .EnableInterfaceInterceptors(new ProxyGenerationOptions()
+              {
+                  Selector = new AspectInterceptorSelector()
+              }).SingleInstance();
 
         }
     }

@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Entities;
 using DataAccess.Abstract;
 using System;
@@ -9,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
+
     public class UserManager : IUserService
     {
         private readonly IUserDal _userDal;
@@ -18,6 +21,8 @@ namespace Business.Concrete
             _userDal = userDal;
         }
 
+        // bu dependecy çözmem gerekiyor.
+        [ValidationAspect(typeof(UserValidator))]
         public void Add(User user)
         {
             _userDal.Add(user);
