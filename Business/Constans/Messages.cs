@@ -11,6 +11,7 @@ namespace Business.Contans
         // Company
         public static string AddedCompany = "Şirket kaydı başarıyla tamamlandı"; 
         public static string CompanyAlreadyExists = "Böyle bir şirket mevcut.";
+        public static string UpdateCompany = "irket kaydı başarıyla güncellendi.";
 
         // User
         public static string UserNotFound = "Kullanıcı kaydı bulunamadı";
@@ -32,6 +33,9 @@ namespace Business.Contans
         public static string RemovedMailTemplate = "Mail şablonu başarılı bir şekilde silindi.";
         public static string MailTemplateUpdated = "Mail şablonu başarılı bir şekilde güncellendi.";
 
-
+        // Currency Account
+        public static string AddedCurrencyAccount = "Cari hesap başarılı bir şekilde eklendi.";
+        public static string DeletedCurrencyAccount = "Cari hesap başarılı bir şekilde kaldırıldı.";
+        public static string UpdateCurrencyAccount = "Cari hesap başarılı bir şekilde güncellendi.";
     }
 }

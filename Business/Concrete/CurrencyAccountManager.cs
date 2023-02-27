@@ -1,4 +1,10 @@
-﻿using Business.Abstract;
+﻿using Autofac.Core.Resolving.Middleware;
+using Business.Abstract;
+using Business.Contans;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Results.Abstract;
+using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -16,6 +22,36 @@ namespace Business.Concrete
         public CurrencyAccountManager(ICurrencyAccountDal currencyAccountDal)
         {
             _currencyAccountDal = currencyAccountDal;
+        }
+
+        [ValidationAspect(typeof(CurrencyAccountValidator))]
+        public IResult Add(CurrencyAccount currencyAccount)
+        {
+            _currencyAccountDal.Add(currencyAccount);
+            return new SuccessResult(Messages.AddedCurrencyAccount);
+        }
+
+        public IResult Delete(CurrencyAccount currencyAccount)
+        {
+            _currencyAccountDal.Delete(currencyAccount);
+            return new SuccessResult(Messages.DeletedCurrencyAccount);
+        }
+
+        public IDataResult<CurrencyAccount> Get(int id)
+        {
+            return new SuccessDataResult<CurrencyAccount>(_currencyAccountDal.Get(p => p.Id == id));
+        }
+
+        public IDataResult<List<CurrencyAccount>> GetList(int companyId)
+        {
+            return new SuccessDataResult<List<CurrencyAccount>>(_currencyAccountDal.GetAll(p => p.CompanyId == companyId));
+        }
+
+        [ValidationAspect(typeof(CurrencyAccountValidator))]
+        public IResult Update(CurrencyAccount currencyAccount)
+        {
+            _currencyAccountDal.Update(currencyAccount);
+            return new SuccessResult(Messages.UpdateCurrencyAccount);
         }
     }
 }

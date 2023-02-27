@@ -75,3 +75,5 @@ D:\eReconciliationProject\WebApi\bin\Debug\net6.0\DataAccess.pdb
 D:\eReconciliationProject\WebApi\bin\Debug\net6.0\Entities.pdb
 D:\eReconciliationProject\WebApi\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\eReconciliationProject\WebApi\bin\Debug\net6.0\FluentValidation.dll
+D:\eReconciliationProject\WebApi\bin\Debug\net6.0\Autofac.Extras.DynamicProxy.dll
+D:\eReconciliationProject\WebApi\bin\Debug\net6.0\Castle.Core.dll

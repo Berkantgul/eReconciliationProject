@@ -7,6 +7,7 @@ using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,13 @@ namespace Business.Concrete
             return new SuccessResult(Messages.AddedCompany);
         }
 
+        public IResult AddCompanyAndUser(CompanyDto companyDto)
+        {
+            _companyDal.Add(companyDto.company);
+            _companyDal.UserCompanyAdd(companyDto.userId, companyDto.company.Id);
+            return new SuccessResult(Messages.AddedCompany);
+        }
+
         public IResult CompanyExists(Company company)
         {
             var result = _companyDal.Get(i => i.Name == company.Name && i.IdentityNumber == company.IdentityNumber && i.TaxDepartment == company.TaxDepartment && i.TaxIdNumber == company.TaxIdNumber);
@@ -46,9 +54,20 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Company>>(_companyDal.GetAll(), "Başarılı");
         }
 
+        public IDataResult<Company> GetById(int id)
+        {
+            return new SuccessDataResult<Company>(_companyDal.Get(i => i.Id == id));
+        }
+
         public IDataResult<UserCompany> GetCompany(int userId)
         {
             return new SuccessDataResult<UserCompany>(_companyDal.GetCompany(userId));
+        }
+
+        public IResult Update(Company company)
+        {
+            _companyDal.Update(company);
+            return new SuccessResult(Messages.UpdateCompany);
         }
 
         public IResult UserCompanyAdd(int userId, int companyId)

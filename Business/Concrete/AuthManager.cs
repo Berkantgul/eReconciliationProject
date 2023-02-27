@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Contans;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Transaction;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Entities;
 using Core.Utilities.Hashing;
@@ -78,6 +79,7 @@ namespace Business.Concrete
 
         }
 
+        [TransactionScopeAspect]
         public IDataResult<UserCompanyDto> Register(UserForRegister userForRegister, string password, Company company)
         {
             byte[] passworhHash, passwordSalt;
