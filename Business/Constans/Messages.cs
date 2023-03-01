@@ -37,5 +37,31 @@ namespace Business.Contans
         public static string AddedCurrencyAccount = "Cari hesap başarılı bir şekilde eklendi.";
         public static string DeletedCurrencyAccount = "Cari hesap başarılı bir şekilde kaldırıldı.";
         public static string UpdateCurrencyAccount = "Cari hesap başarılı bir şekilde güncellendi.";
+    
+        // Account Reconciliaiton
+        public static string AddedAccountRecanciliation = "Cari Mutabakat başarılı bir şekilde oluşturuldu.";
+        public static string DeletedAccountRecanciliation = "Cari Mutabakat başarılı bir şekilde kaldırıldı.";
+        public static string UpdatedAccountRecanciliation = "Cari Mutabakat başarılı bir şekilde güncellendi.";
+        public static string FromExcelAddToAccountReconciliaiton = "Excel aracılığıyla Cari Mutabakat başarılı bir şekilde güncellendi.";
+    
+        // Account Reconciliation Detail
+        public static string AddedAccountReconciliaitonDetail = "Cari Mutabakat detay başarılı bir şekilde oluşturuldu.";
+        public static string DeletedAccountReconciliaitonDetail = "Cari Mutabakat detay başarılı bir şekilde kaldırıldı.";
+        public static string UpdateAccountReconciliaitonDetail = "Cari Mutabakat detay başarılı bir şekilde güncellendi.";
+        public static string FromExcelAddToAccountReconciliationDetail = "Excel aracılığıyla Cari Mutabakat detay başarılı bir şekilde güncellendi.";
+
+        // BaBs Reconciliation 
+        public static string AddedBaBsRecanciliation = "BaBs Mutabakat başarılı bir şekilde oluşturuldu.";
+        public static string DeletedBaBsRecanciliation = "BaBs Mutabakat başarılı bir şekilde kaldırıldı.";
+        public static string UpdatedBaBsRecanciliation = "BaBs Mutabakat başarılı bir şekilde güncellendi.";
+        public static string FromExcelAddToBaBsReconciliaiton = "Excel aracılığıyla BaBs Mutabakat başarılı bir şekilde güncellendi.";
+
+        // BaBs reconciliation Detail
+        public static string AddedBaBsReconciliatonDetail = "BaBs Mutabakat detayı başarılı bir şekilde oluşturuldu.";
+        public static string FromExcelAddToBaBsReconciliationDetail = "Excel aracılığıyla BaBs Mutabakat detayı başarılı bir şekilde oluşturuldu.";
+        public static string DeletedBaBsRecanciliationDetail = "BaBs Mutabakat detayı başarılı bir şekilde kaldırıldı.";
+        public static string UpdatedBaBsRecanciliationDetail = "BaBs Mutabakat detayı başarılı bir şekilde güncellendi.";
+    
+    
     }
 }

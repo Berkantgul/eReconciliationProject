@@ -1,6 +1,5 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
-using Entities.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,36 +7,41 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CurrencyAccountController : ControllerBase
+    public class BaBsReconciliaitonController : ControllerBase
     {
-        private readonly ICurrencyAccountService _currencyAccountService;
+        private readonly IBaBsRecanciliationService _baBsRecanciliationService;
 
-        public CurrencyAccountController(ICurrencyAccountService currencyAccountService)
+        public BaBsReconciliaitonController(IBaBsRecanciliationService baBsRecanciliationService)
         {
-            _currencyAccountService = currencyAccountService;
-        }
-        [HttpPost("add")]
-        public IActionResult Add(CurrencyAccount currencyAccount)
-        {
-            var result = _currencyAccountService.Add(currencyAccount);
-            if (result.Success)
-            {
-                return Ok();
-            }
-            return BadRequest(result.Message);
+            _baBsRecanciliationService = baBsRecanciliationService;
         }
 
         [HttpGet("getList")]
         public IActionResult GetList(int companyId)
         {
-            var result = _currencyAccountService.GetList(companyId);
-            return Ok(result.Data);
+            var result = _baBsRecanciliationService.GetList(companyId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result.Message);
         }
 
-        [HttpPost("update")]
-        public IActionResult Update(CurrencyAccount currencyAccount)
+        [HttpPost("add")]
+        public IActionResult Add(BaBsRecanciliation baBsRecanciliation)
         {
-            var result = _currencyAccountService.Update(currencyAccount);
+            var result = _baBsRecanciliationService.Add(baBsRecanciliation);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            return BadRequest(result.Message);
+        }
+
+        [HttpPost("delete")]
+        public IActionResult Delete(BaBsRecanciliation baBsRecanciliation)
+        {
+            var result = _baBsRecanciliationService.Delete(baBsRecanciliation);
             if (result.Success)
             {
                 return Ok(result.Message);
@@ -48,22 +52,23 @@ namespace WebApi.Controllers
         [HttpGet("get")]
         public IActionResult Get(int id)
         {
-            return Ok(_currencyAccountService.Get(id).Data);
+            return Ok(_baBsRecanciliationService.Get(id));
         }
 
-        [HttpPost("delete")]
-        public IActionResult Delete(CurrencyAccount currencyAccount)
+        [HttpPut("update")]
+        public IActionResult Update(BaBsRecanciliation baBsRecanciliation)
         {
-            var result = _currencyAccountService.Delete(currencyAccount);
+            var result = _baBsRecanciliationService.Update(baBsRecanciliation);
             if (result.Success)
             {
                 return Ok(result.Message);
             }
             return BadRequest(result.Message);
+
         }
 
-        [HttpPost("addFromExcel")]
-        public IActionResult AddFromExcel(IFormFile file, int companyId)
+        [HttpPost("fromAddToExcel")]
+        public IActionResult FromAddToExcel(IFormFile file, int companyId)
         {
             if (file.Length > 0)
             {
@@ -74,11 +79,12 @@ namespace WebApi.Controllers
                     file.CopyTo(stream);
                     stream.Flush();
                 }
-                var result = _currencyAccountService.AddToExcel(filePath, companyId);
+                var result = _baBsRecanciliationService.AddToExcel(filePath, companyId);
                 if (result.Success)
                 {
                     return Ok(result.Message);
                 }
+                
                 return BadRequest(result.Message);
             }
             return BadRequest("Geçerli bir excel yüklemesi gerçekleşmedi.");

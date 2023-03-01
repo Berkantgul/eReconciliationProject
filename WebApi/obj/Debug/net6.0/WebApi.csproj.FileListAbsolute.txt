@@ -77,3 +77,4 @@ D:\eReconciliationProject\WebApi\bin\Debug\net6.0\Microsoft.AspNetCore.Authentic
 D:\eReconciliationProject\WebApi\bin\Debug\net6.0\FluentValidation.dll
 D:\eReconciliationProject\WebApi\bin\Debug\net6.0\Autofac.Extras.DynamicProxy.dll
 D:\eReconciliationProject\WebApi\bin\Debug\net6.0\Castle.Core.dll
+D:\eReconciliationProject\WebApi\bin\Debug\net6.0\ExcelDataReader.dll

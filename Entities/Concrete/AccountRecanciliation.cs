@@ -20,7 +20,7 @@ namespace Entities.Concrete
         public bool IsSendEmail { get; set; }
         public DateTime? SendEmailDate { get; set; }
         public bool? IsEmailRead { get; set; }
-        public DateTime EmailReadDate { get; set; }
+        public DateTime? EmailReadDate { get; set; }
         public bool? IsResultSucceed { get; set; }
         public DateTime? ResultDate { get; set; }
         public string? ResultNote { get; set; }
