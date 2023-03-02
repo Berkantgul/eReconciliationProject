@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Contans;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.Entities;
 using Core.Utilities.Results.Abstract;
@@ -25,6 +26,7 @@ namespace Business.Concrete
             _companyDal = companyDal;
         }
 
+        [CacheRemoveAspect("ICompanyService.Get")]
         [ValidationAspect(typeof(CompanyValidator))]
         public IResult Add(Company company)
         {
@@ -32,6 +34,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.AddedCompany);
         }
 
+        [CacheRemoveAspect("ICompanyService.Get")]
         public IResult AddCompanyAndUser(CompanyDto companyDto)
         {
             _companyDal.Add(companyDto.company);
@@ -49,27 +52,32 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        [CacheAspect(60)]
         public IDataResult<List<Company>> GetAll()
         {
             return new SuccessDataResult<List<Company>>(_companyDal.GetAll(), "Başarılı");
         }
 
+        [CacheAspect(60)]
         public IDataResult<Company> GetById(int id)
         {
             return new SuccessDataResult<Company>(_companyDal.Get(i => i.Id == id));
         }
 
+        [CacheAspect(60)]
         public IDataResult<UserCompany> GetCompany(int userId)
         {
             return new SuccessDataResult<UserCompany>(_companyDal.GetCompany(userId));
         }
 
+        [CacheRemoveAspect("ICompanyService.Get")]
         public IResult Update(Company company)
         {
             _companyDal.Update(company);
             return new SuccessResult(Messages.UpdateCompany);
         }
 
+        [CacheRemoveAspect("ICompanyService.Get")]
         public IResult UserCompanyAdd(int userId, int companyId)
         {
             _companyDal.UserCompanyAdd(userId, companyId);

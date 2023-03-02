@@ -50,9 +50,9 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("get")]
-        public IActionResult Get(int id)
+        public IActionResult GetById(int id)
         {
-            return Ok(_accountRecanciliationService.Get(id));
+            return Ok(_accountRecanciliationService.GetById(id));
         }
 
         [HttpPut("update")]

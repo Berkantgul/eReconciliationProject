@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Contans;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Transaction;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
@@ -26,11 +27,14 @@ namespace Business.Concrete
             _currencyAccountService = currencyAccountService;
         }
 
+        [CacheRemoveAspect("IAccountRecanciliationService.Get")]
         public IResult Add(AccountRecanciliation accountRecanciliation)
         {
             _accountRecanciliationDal.Add(accountRecanciliation);
             return new SuccessResult(Messages.AddedAccountRecanciliation);
         }
+
+        [CacheRemoveAspect("IAccountRecanciliationService.Get")]
         [TransactionScopeAspect]
         public IResult AddToExcel(string filePath, int companyId)
         {
@@ -74,23 +78,28 @@ namespace Business.Concrete
             }
             return new SuccessResult(Messages.FromExcelAddToAccountReconciliaiton);
         }
+        
 
+        [CacheRemoveAspect("IAccountRecanciliationService.Get")]
         public IResult Delete(AccountRecanciliation accountRecanciliation)
         {
             _accountRecanciliationDal.Delete(accountRecanciliation);
             return new SuccessResult(Messages.DeletedAccountRecanciliation);
         }
 
-        public IDataResult<AccountRecanciliation> Get(int id)
+        [CacheAspect(60)]
+        public IDataResult<AccountRecanciliation> GetById(int id)
         {
             return new SuccessDataResult<AccountRecanciliation>(_accountRecanciliationDal.Get(i => i.Id == id));
         }
-
+       
+        [CacheAspect(60)]
         public IDataResult<List<AccountRecanciliation>> GetList(int companyId)
         {
             return new SuccessDataResult<List<AccountRecanciliation>>(_accountRecanciliationDal.GetAll(i => i.CompanyId == companyId));
         }
 
+        [CacheRemoveAspect("IAccountRecanciliationService.Get")]
         public IResult Update(AccountRecanciliation accountRecanciliation)
         {
             _accountRecanciliationDal.Update(accountRecanciliation);

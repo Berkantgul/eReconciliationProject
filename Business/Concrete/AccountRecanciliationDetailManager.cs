@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Contans;
+using Core.Aspects.Autofac.Caching;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -23,13 +24,15 @@ namespace Business.Concrete
         {
             _accountRecanciliationDetailDal = accountRecanciliationDetailDal;
         }
-
+       
+        [CacheRemoveAspect("IAccountRecanciliationDetailService.Get")]
         public IResult Add(AccountRecanciliationDetail accountRecanciliationDetail)
         {
             _accountRecanciliationDetailDal.Add(accountRecanciliationDetail);
             return new SuccessResult(Messages.AddedAccountReconciliaitonDetail);
         }
-
+        
+        [CacheRemoveAspect("IAccountRecanciliationDetailService.Get")]
         public IResult AddToExcel(string filePath, int accountReconciliaitonId)
         {
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
@@ -66,23 +69,27 @@ namespace Business.Concrete
             }
             return new SuccessResult(Messages.FromExcelAddToAccountReconciliationDetail);
         }
-
+        
+        [CacheRemoveAspect("IAccountRecanciliationDetailService.Get")]
         public IResult Delete(AccountRecanciliationDetail accountRecanciliationDetail)
         {
             _accountRecanciliationDetailDal.Delete(accountRecanciliationDetail);
             return new SuccessResult(Messages.DeletedAccountReconciliaitonDetail);
         }
-
+        
+        [CacheAspect(60)]
         public IDataResult<AccountRecanciliationDetail> Get(int id)
         {
             return new SuccessDataResult<AccountRecanciliationDetail>(_accountRecanciliationDetailDal.Get(i => i.Id == id));
         }
-
+        
+        [CacheAspect(60)]
         public IDataResult<List<AccountRecanciliationDetail>> GetList(int accountReconciliaitonId)
         {
             return new SuccessDataResult<List<AccountRecanciliationDetail>>(_accountRecanciliationDetailDal.GetAll(i => i.AccountRecanciliationId == accountReconciliaitonId));
         }
-
+        
+        [CacheRemoveAspect("IAccountRecanciliationDetailService.Get")]
         public IResult Update(AccountRecanciliationDetail accountRecanciliationDetail)
         {
             _accountRecanciliationDetailDal.Update(accountRecanciliationDetail);
