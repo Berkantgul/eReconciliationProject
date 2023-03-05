@@ -50,8 +50,9 @@ namespace Business.Concrete
         public IDataResult<AccessToken> CreateAccessToken(User user, int companyId)
         {
             var claims = _userService.GetClaims(user, companyId);
-            var accessToken = _tokenHelper.CreateToken(user, claims, companyId);
-            return new SuccessDataResult<AccessToken>(accessToken);
+            var company = _companyService.GetById(companyId).Data;
+            var accessToken = _tokenHelper.CreateToken(user, claims, companyId, company.Name);
+            return new SuccessDataResult<AccessToken>(accessToken,Messages.SuccessfulLogin);
         }
 
         public IDataResult<User> GetById(int id)
@@ -97,8 +98,8 @@ namespace Business.Concrete
                 PasswordSalt = passwordSalt
             };
 
-            ValidationTools.Validate(new UserValidator(), user);
-            ValidationTools.Validate(new CompanyValidator(), company);
+            //ValidationTools.Validate(new UserValidator(), user);
+            //ValidationTools.Validate(new CompanyValidator(), company);
             _userService.Add(user);
             _companyService.Add(company);
             _companyService.UserCompanyAdd(user.Id, company.Id);

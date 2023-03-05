@@ -1,6 +1,8 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects;
 using Business.Contans;
 using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
 using Core.Aspects.Autofac.Transaction;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
@@ -27,6 +29,8 @@ namespace Business.Concrete
             _currencyAccountService = currencyAccountService;
         }
 
+        [SecuredOperations("BaBsRecanciliation.Add,Admin")]
+        [PerformanceAspect(3)]
         [CacheRemoveAspect("IBaBsRecanciliationService.Get")]
         public IResult Add(BaBsRecanciliation baBsRecanciliation)
         {
@@ -34,6 +38,8 @@ namespace Business.Concrete
             return new SuccessResult(Messages.AddedBaBsRecanciliation);
         }
 
+        [SecuredOperations("BaBsRecanciliation.Add,Admin")]
+        [PerformanceAspect(3)]
         [CacheRemoveAspect("IBaBsRecanciliationService.Get")]
         [TransactionScopeAspect]
         public IResult AddToExcel(string filePath, int companyId)
@@ -77,6 +83,8 @@ namespace Business.Concrete
             return new SuccessResult(Messages.FromExcelAddToBaBsReconciliaiton);
         }
 
+        [PerformanceAspect(3)]
+        [SecuredOperations("BaBsRecanciliation.Delete,Admin")]
         [CacheRemoveAspect("IBaBsRecanciliationService.Get")]
         public IResult Delete(BaBsRecanciliation baBsRecanciliation)
         {
@@ -84,18 +92,24 @@ namespace Business.Concrete
             return new SuccessResult(Messages.DeletedBaBsRecanciliation);
         }
 
+        [PerformanceAspect(3)]
+        [SecuredOperations("BaBsRecanciliation.Get,Admin")]
         [CacheAspect(60)]
         public IDataResult<BaBsRecanciliation> Get(int id)
         {
             return new SuccessDataResult<BaBsRecanciliation>(_baBsRecanciliationDal.Get(i => i.Id == id));
         }
 
+        [SecuredOperations("BaBsRecanciliation.GetList,Admin")]
+        [PerformanceAspect(3)]
         [CacheAspect(60)]
         public IDataResult<List<BaBsRecanciliation>> GetList(int companyId)
         {
             return new SuccessDataResult<List<BaBsRecanciliation>>(_baBsRecanciliationDal.GetAll(i => i.CompanyId == companyId));
         }
 
+        [SecuredOperations("BaBsRecanciliation.Update,Admin")]
+        [PerformanceAspect(3)]
         [CacheRemoveAspect("IBaBsRecanciliationService.Get")]
         public IResult Update(BaBsRecanciliation baBsRecanciliation)
         {

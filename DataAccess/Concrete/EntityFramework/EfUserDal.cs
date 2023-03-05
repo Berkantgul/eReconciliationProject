@@ -18,18 +18,21 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 var result = from operationClaim in context.OperationClaims
                              join userOperationClaim in context.UserOperationClaims
-                             on operationClaim.Id equals userOperationClaim.Id
+                             on operationClaim.Id equals userOperationClaim.OperationClaimId
                              where userOperationClaim.CompanyId == companyId && userOperationClaim.UserId == user.Id
                              select new OperationClaim
                              {
                                  Id = operationClaim.Id,
-                                 Name = operationClaim.Name
+                                 Name = operationClaim.Name,
+                                 AddedAt = operationClaim.AddedAt,
+                                 IsActive = operationClaim.IsActive,
                              };
+                
+                var deneme = result.ToList();
                 return result.ToList();
-
             }
         }
 
-        
+
     }
 }

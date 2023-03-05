@@ -66,15 +66,18 @@ namespace WebApi.Controllers
             }
             if (userToLogin.Data.IsActive)
             {
-                var userCompany = _authService.GetCompany(userToLogin.Data.Id);
-                var result = _authService.CreateAccessToken(userToLogin.Data, userCompany.Data.CompanyId);
-                if (result.Success)
+                if (userToLogin.Data.MailConfirm)
                 {
-                    return Ok(result);
+                    var userCompany = _authService.GetCompany(userToLogin.Data.Id).Data;
+                    var result = _authService.CreateAccessToken(userToLogin.Data, userCompany.CompanyId);
+                    if (result.Success)
+                    {
+                        return Ok(result);
+                    }
+                    return BadRequest(result);
                 }
-                return BadRequest(result.Message);
+                return BadRequest("Gelen onay mailini cevaplamalısınız. Mail adresinizi onaylamadan sisteme giriş yapamazsınız!");
             }
-
             return BadRequest("Kullanıcınız pasif durumda, aktif etmek için yöneticinizle danışın.");
         }
 

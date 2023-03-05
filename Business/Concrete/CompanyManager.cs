@@ -1,7 +1,9 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects;
 using Business.Contans;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
 using Core.Aspects.Autofac.Validation;
 using Core.Entities;
 using Core.Utilities.Results.Abstract;
@@ -70,6 +72,8 @@ namespace Business.Concrete
             return new SuccessDataResult<UserCompany>(_companyDal.GetCompany(userId));
         }
 
+        [PerformanceAspect(3)]
+        [SecuredOperations("Company.Add,Admin")]
         [CacheRemoveAspect("ICompanyService.Get")]
         public IResult Update(Company company)
         {

@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects;
 using Business.Contans;
+using Core.Aspects.Autofac.Performance;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -48,6 +50,8 @@ namespace Business.Concrete
             return new SuccessDataResult<MailTemplate>(_mailTemplateDal.Get(i => i.CompanyId == companyId && i.Type == type));
         }
 
+        [PerformanceAspect(3)]
+        [SecuredOperations("MailTemplate.Add,Admin")]
         public IResult Update(MailTemplate mailTemplate)
         {
             _mailTemplateDal.Update(mailTemplate);
