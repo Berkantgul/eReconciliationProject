@@ -106,7 +106,7 @@ namespace Business.Concrete
         }
 
         [PerformanceAspect(3)]
-        [SecuredOperations("CurrencyAccount.Get,Admin")]
+        //[SecuredOperations("CurrencyAccount.Get,Admin")]
         public IDataResult<CurrencyAccount> GetCode(string code, int companyId)
         {
             return new SuccessDataResult<CurrencyAccount>(_currencyAccountDal.Get(i => i.Code == code && i.CompanyId == companyId));

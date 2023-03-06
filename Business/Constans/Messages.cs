@@ -61,6 +61,12 @@ namespace Business.Contans
         public static string FromExcelAddToBaBsReconciliationDetail = "Excel aracılığıyla BaBs Mutabakat detayı başarılı bir şekilde oluşturuldu.";
         public static string DeletedBaBsRecanciliationDetail = "BaBs Mutabakat detayı başarılı bir şekilde kaldırıldı.";
         public static string UpdatedBaBsRecanciliationDetail = "BaBs Mutabakat detayı başarılı bir şekilde güncellendi.";
+
+        // Operation Claim
+        public static string AddedOperationClaim = "Yetki ekleme işlemi başarılı.";
+        public static string DeletedOperationClaim = "Yetki kaldırma işlemi başarılı.";
+        public static string UpdateOperationClaim = "Yetki güncelleme işlemi başarılı.";
+
     
     
     }

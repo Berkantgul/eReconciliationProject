@@ -9,6 +9,7 @@ using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using Entities.Dtos;
 using ExcelDataReader;
 using System;
 using System.Collections.Generic;
@@ -22,11 +23,17 @@ namespace Business.Concrete
     {
         private readonly IBaBsRecanciliationDal _baBsRecanciliationDal;
         private readonly ICurrencyAccountService _currencyAccountService;
+        private readonly IMailService _mailService;
+        private readonly IMailTemplateService _mailTemplateService;
+        private readonly IMailParameterService _mailParameterService;
 
-        public BaBsRecanciliationManager(IBaBsRecanciliationDal baBsRecanciliationDal, ICurrencyAccountService currencyAccountService)
+        public BaBsRecanciliationManager(IBaBsRecanciliationDal baBsRecanciliationDal, ICurrencyAccountService currencyAccountService, IMailService mailService, IMailTemplateService mailTemplateService, IMailParameterService mailParameterService)
         {
             _baBsRecanciliationDal = baBsRecanciliationDal;
             _currencyAccountService = currencyAccountService;
+            _mailService = mailService;
+            _mailTemplateService = mailTemplateService;
+            _mailParameterService = mailParameterService;
         }
 
         [SecuredOperations("BaBsRecanciliation.Add,Admin")]
@@ -100,12 +107,65 @@ namespace Business.Concrete
             return new SuccessDataResult<BaBsRecanciliation>(_baBsRecanciliationDal.Get(i => i.Id == id));
         }
 
+        [PerformanceAspect(3)]
+        [CacheAspect(60)]
+        public IDataResult<BaBsRecanciliation> GetByCode(string code)
+        {
+            return new SuccessDataResult<BaBsRecanciliation>(_baBsRecanciliationDal.Get(p => p.Guid == code));
+        }
+
         [SecuredOperations("BaBsRecanciliation.GetList,Admin")]
         [PerformanceAspect(3)]
         [CacheAspect(60)]
         public IDataResult<List<BaBsRecanciliation>> GetList(int companyId)
         {
             return new SuccessDataResult<List<BaBsRecanciliation>>(_baBsRecanciliationDal.GetAll(i => i.CompanyId == companyId));
+        }
+
+        [PerformanceAspect(3)]
+        [SecuredOperations("BaBsReconciliation.GetList,Admin")]
+        [CacheAspect(60)]
+        public IDataResult<List<BaBsReconciliationDto>> GetListDto(int companyId)
+        {
+            return new SuccessDataResult<List<BaBsReconciliationDto>>(_baBsRecanciliationDal.GetAllDto(companyId));
+        }
+
+        [PerformanceAspect(3)]
+        [SecuredOperations("BaBsReconciliation.SendMail,Admin")]
+        public IResult SendReconciliationMail(BaBsReconciliationDto baBsReconciliationDto)
+        {
+            string subject = "Mutabakat Mail";
+            string body = $"Şirket Adımız : {baBsReconciliationDto.CompanyName} <br />" +
+                          $"Şirket Vergi Dairesi : {baBsReconciliationDto.CompanyTaxDepartment} <br />" +
+                          $"Şirket Vergi Numarası : {baBsReconciliationDto.CompanyTaxIdNumber} - {baBsReconciliationDto.CompanyIdentityNumber} <br/ ><hr />" +
+                          $"Sizin Şirket : {baBsReconciliationDto.AccountName} <br />" +
+                          $"Sizin Şirket Vergi Dairesi : {baBsReconciliationDto.AccountIdentityNumber} <br />" +
+                          $"Sizin şirket Vergi Numarası : {baBsReconciliationDto.AccountTaxIdNumber} - {baBsReconciliationDto.AccountIdentityNumber} <br /><hr />" +
+                          $"Ay / Yıl : {baBsReconciliationDto.Mounth} / {baBsReconciliationDto.Year} <br />" +
+                          $"Adet : {baBsReconciliationDto.Quantity} <br />" +
+                          $"Tutar : {baBsReconciliationDto.Total} {baBsReconciliationDto.CurrencyCode}";
+
+            string link = "https://localhost:7127/api/BaBsReconciliation/GetByCode?code=" + baBsReconciliationDto.Guid;
+            string linkDescription = "Mutabakatı cevaplamak için tıklayın";
+
+            var mailTemplate = _mailTemplateService.GetByTemplateName(13, "Kayıt");
+            string templateBody = mailTemplate.Data.Value;
+            templateBody = templateBody.Replace("{{title}}", subject);
+            templateBody = templateBody.Replace("{{message}}", body);
+            templateBody = templateBody.Replace("{{link}}", link);
+            templateBody = templateBody.Replace("{{linkDescription}}", linkDescription);
+
+            var mailParameter = _mailParameterService.Get(13);
+            Entities.Dtos.SendMailDto sendMailDto = new Entities.Dtos.SendMailDto
+            {
+                email = baBsReconciliationDto.AccountEmail,
+                subject = subject,
+                body = templateBody,
+                mailParameter = mailParameter.Data
+            };
+
+            _mailService.SendMail(sendMailDto);
+            return new SuccessResult(Messages.MailSendSuccess);
         }
 
         [SecuredOperations("BaBsRecanciliation.Update,Admin")]

@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Entities.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +20,7 @@ namespace WebApi.Controllers
         [HttpGet("getList")]
         public IActionResult GetList(int companyId)
         {
-            var result = _baBsRecanciliationService.GetList(companyId);
+            var result = _baBsRecanciliationService.GetListDto(companyId);
             if (result.Success)
             {
                 return Ok(result);
@@ -84,10 +85,32 @@ namespace WebApi.Controllers
                 {
                     return Ok(result.Message);
                 }
-                
+
                 return BadRequest(result.Message);
             }
             return BadRequest("Geçerli bir excel yüklemesi gerçekleşmedi.");
+        }
+
+        [HttpPost("sendReconciliationMail")]
+        public IActionResult SendReconciliationMail(BaBsReconciliationDto baBsReconciliationDto)
+        {
+            var result = _baBsRecanciliationService.SendReconciliationMail(baBsReconciliationDto);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result.Message);
+        }
+
+        [HttpGet("getByCode")]
+        public IActionResult GetByCode(string code)
+        {
+            var result = _baBsRecanciliationService.GetByCode(code);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result.Message);
         }
     }
 }
