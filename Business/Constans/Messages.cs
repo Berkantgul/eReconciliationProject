@@ -20,6 +20,7 @@ namespace Business.Contans
         public static string UserRegistered = "Kullanıcı eklendi.";
         public static string ExistsAlreadyUser = "Böyle bir kişi zaten mevcut.";
         public static string ConfirmValue = "Mail onaylama işlemi başarılı.";
+        public static string ChangedPassword = "Şifre başarılı bir şekilde güncellendi.";
 
         // Mail 
         public static string MailParameterUpdated = "Mail parametrelerini güncellendi.";
@@ -67,7 +68,8 @@ namespace Business.Contans
         public static string DeletedOperationClaim = "Yetki kaldırma işlemi başarılı.";
         public static string UpdateOperationClaim = "Yetki güncelleme işlemi başarılı.";
 
-    
+        // TermsAndCondition
+        public static string AddedTermsAndCondition = "Sözleşme güncelleme işlemi başarılı.";
     
     }
 }

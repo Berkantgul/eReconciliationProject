@@ -25,8 +25,11 @@ namespace Business.Abstract
         IResult CompanyExists(Company company);
         IDataResult<User> GetByMailConfirmValue(string value);
         IResult Update(User user);
+        IResult ChangePassword(User user);
         IDataResult<User> GetById(int id);
+        IDataResult<User> GetByEmail(string email);
         IResult SendConfirmEmail(User user);
         IDataResult<UserCompany> GetCompany(int userId);
+        IResult SendForgotPasswordEmail(User user, string value);
     }
 }

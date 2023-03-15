@@ -176,5 +176,15 @@ namespace Business.Concrete
             _baBsRecanciliationDal.Update(baBsRecanciliation);
             return new SuccessResult(Messages.UpdatedBaBsRecanciliation);
         }
+
+        IDataResult<BaBsReconciliationDto> IBaBsRecanciliationService.GetByCode(string code)
+        {
+            throw new NotImplementedException();
+        }
+
+        IDataResult<List<BaBsRecanciliation>> IBaBsRecanciliationService.GetListDto(int companyId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

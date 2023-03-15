@@ -52,7 +52,7 @@ namespace Business.Concrete
             var claims = _userService.GetClaims(user, companyId);
             var company = _companyService.GetById(companyId).Data;
             var accessToken = _tokenHelper.CreateToken(user, claims, companyId, company.Name);
-            return new SuccessDataResult<AccessToken>(accessToken,Messages.SuccessfulLogin);
+            return new SuccessDataResult<AccessToken>(accessToken, Messages.SuccessfulLogin);
         }
 
         public IDataResult<User> GetById(int id)
@@ -128,7 +128,7 @@ namespace Business.Concrete
         {
             string subject = "Kullanıcı kayıt onay maili.";
             string body = "Kullanıcınız sisteme kayıt oldu, kaydınızı tamamlamak için aşağıdaki linke tıklayın";
-            string link = "https://localhost:7127/api/Auth/confirmuser?value=" + user.MailConfirmValue;
+            string link = "https://localhost:4200/registerConfirm/" + user.MailConfirmValue;
             string linkDescription = "Kaydı onaylamak için tıklayın";
 
             var mailTemplate = _mailTemplateService.GetByTemplateName(13, "Kayıt");
@@ -216,6 +216,45 @@ namespace Business.Concrete
         public IDataResult<UserCompany> GetCompany(int userId)
         {
             return new SuccessDataResult<UserCompany>(_companyService.GetCompany(userId).Data);
+        }
+
+        public IDataResult<User> GetByEmail(string email)
+        {
+            return new SuccessDataResult<User>(_userService.GetByMail(email));
+        }
+
+        public IResult SendForgotPasswordEmail(User user, string value)
+        {
+            string subject = "Şifremi Unuttum";
+            string body = "e-Mutabıkat sistesi tarafaından sizin isteğinizle şifre yenileme isteği aldık. Aşağıda belirtilen linke tıklayarak şifrenizi yenileyebilirsiniz. Unutmayın! bu link sadece 1 saat süreliğine geçerlidir.";
+            string link = "https://localhost:7127/api/Auth/forgotPasswordLinkCheck?value=" + value;
+            string linkDescription = "Kaydı onaylamak için tıklayın";
+
+            var mailTemplate = _mailTemplateService.GetByTemplateName(13, "Kayıt");
+            string templateBody = mailTemplate.Data.Value;
+            templateBody = templateBody.Replace("{{title}}", subject);
+            templateBody = templateBody.Replace("{{message}}", body);
+            templateBody = templateBody.Replace("{{link}}", link);
+            templateBody = templateBody.Replace("{{linkDescription}}", linkDescription);
+
+            var mailParameter = _mailParameterService.Get(13);
+            SendMailDto sendMailDto = new SendMailDto
+            {
+                email = user.Email,
+                subject = "Şifremi Unuttum",
+                body = templateBody,
+                mailParameter = mailParameter.Data
+            };
+
+            _mailService.SendMail(sendMailDto);
+
+            return new SuccessResult(Messages.MailSendSuccess);
+        }
+
+        public IResult ChangePassword(User user)
+        {
+            _userService.Update(user);
+            return new SuccessResult(Messages.ChangedPassword);
         }
     }
 }

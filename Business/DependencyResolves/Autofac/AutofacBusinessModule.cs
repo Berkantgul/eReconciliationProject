@@ -59,6 +59,11 @@ namespace Business.DependencyResolves.Autofac
             builder.RegisterType<MailTemplateManager>().As<IMailTemplateService>();
             builder.RegisterType<EfMailTemplateDal>().As<IMailTemplateDal>();
 
+            builder.RegisterType<TermsAndConditionManager>().As<ITermsAndConditionService>();
+            builder.RegisterType<EfTermsAndConditionDal>().As<ITermsAndConditionDal>();
+
+            builder.RegisterType<ForgotPasswordManager>().As<IForgotPasswordService>();
+            builder.RegisterType<EfForgotPasswordDal>().As<IForgotPasswordDal>();
 
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
