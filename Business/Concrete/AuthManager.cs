@@ -8,6 +8,7 @@ using Core.Utilities.Hashing;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using Core.Utilities.Security.JWT;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.Dtos;
 using System;
@@ -15,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Business.Concrete
 {
@@ -26,8 +28,11 @@ namespace Business.Concrete
         private readonly IMailService _mailService;
         private readonly IMailParameterService _mailParameterService;
         private readonly IMailTemplateService _mailTemplateService;
+        private readonly IUserOperationClaimService _userOperationClaimService;
+        private readonly IOperationClaimService _operationClaimService;
 
-        public AuthManager(IUserService userService, ITokenHelper tokenHelper, ICompanyService companyService, IMailService mailService, IMailParameterService mailParameterService, IMailTemplateService mailTemplateService)
+
+        public AuthManager(IUserService userService, ITokenHelper tokenHelper, ICompanyService companyService, IMailService mailService, IMailParameterService mailParameterService, IMailTemplateService mailTemplateService,IUserOperationClaimService userOperationClaimService,IOperationClaimService operationClaimService)
         {
             _userService = userService;
             _tokenHelper = tokenHelper;
@@ -35,6 +40,8 @@ namespace Business.Concrete
             _mailService = mailService;
             _mailParameterService = mailParameterService;
             _mailTemplateService = mailTemplateService;
+            _userOperationClaimService = userOperationClaimService;
+            _operationClaimService = operationClaimService;
         }
 
         public IResult CompanyExists(Company company)
@@ -118,6 +125,25 @@ namespace Business.Concrete
                 PasswordSalt = user.PasswordSalt
             };
 
+
+            var operationClaims = _operationClaimService.GetList().Data;
+            foreach (var operationClaim in operationClaims)
+            {
+                if (operationClaim.Name != "Admin" && operationClaim.Name != "MailParameter" && operationClaim.Name != "MailTemplate" && operationClaim.Name.Contains("UserOperationClaim"))
+                {
+                    UserOperationClaim addUserOperationClaim = new UserOperationClaim()
+                    {
+                        CompanyId = company.Id,
+                        AddedAt = DateTime.Now,
+                        IsActive = true,
+                        OperationClaimId = operationClaim.Id,
+                        UserId = user.Id
+                    };
+                    _userOperationClaimService.Add(addUserOperationClaim);
+                }
+
+            }
+
             // Onay maili 
             SendMail(user);
 
@@ -171,6 +197,25 @@ namespace Business.Concrete
             };
             _userService.Add(user);
             _companyService.UserCompanyAdd(user.Id, companyId);
+
+            var operationClaims = _operationClaimService.GetList().Data;
+            foreach (var operationClaim in operationClaims)
+            {
+                if (operationClaim.Name != "Admin" && operationClaim.Name != "MailParameter" && operationClaim.Name != "MailTemplate" && operationClaim.Name.Contains("UserOperationClaim"))
+                {
+                    UserOperationClaim addUserOperationClaim = new UserOperationClaim()
+                    {
+                        CompanyId = companyId,
+                        AddedAt = DateTime.Now,
+                        IsActive = true,
+                        OperationClaimId = operationClaim.Id,
+                        UserId = user.Id
+                    };
+                    _userOperationClaimService.Add(addUserOperationClaim);
+                }
+
+            }
+
             SendMail(user);
             return new SuccessDataResult<User>(user, Messages.UserRegistered);
         }

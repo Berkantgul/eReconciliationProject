@@ -1,4 +1,5 @@
-﻿using Castle.DynamicProxy;
+﻿using Business.Contans;
+using Castle.DynamicProxy;
 using Core.Extensions;
 using Core.Utilities.Interceptions;
 using Core.Utilities.IoC;
@@ -21,13 +22,14 @@ namespace Business.BusinessAspects
 
         public SecuredOperations(string roles)
         {
-            _roles = roles.Split(",");
+            _roles = roles.Split(',');
             _httpContextAccessor = ServiceTool.ServiceProvider.GetService<IHttpContextAccessor>();
+
         }
 
         protected override void OnBefore(IInvocation invocation)
         {
-            var token = _httpContextAccessor.HttpContext.Request.Headers[HeaderNames.Authorization].ToString().Replace("Bearer ", "");
+            var token = _httpContextAccessor.HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty);
 
             if (token != "")
             {

@@ -36,7 +36,7 @@ namespace Core.Aspects.Autofac.Performance
             {
                 // Mail Gönderme
                 string body = $"Performance : {invocation.Method.DeclaringType.FullName}.{invocation.Method.Name} --> {_stopWatch.Elapsed.TotalSeconds}";
-                SendMail(body);
+                Console.Write(body);
             }
             _stopWatch.Reset();
         }

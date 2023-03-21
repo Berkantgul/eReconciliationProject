@@ -38,6 +38,7 @@ namespace Business.Contans
         public static string AddedCurrencyAccount = "Cari hesap başarılı bir şekilde eklendi.";
         public static string DeletedCurrencyAccount = "Cari hesap başarılı bir şekilde kaldırıldı.";
         public static string UpdateCurrencyAccount = "Cari hesap başarılı bir şekilde güncellendi.";
+        public static string AccountHaveReconciliaition = "Mutabakat işlemi olan cari kaydı silemezsiniz. İstersiniz cari kaydı pasife çekebilirsiniz.";
     
         // Account Reconciliaiton
         public static string AddedAccountRecanciliation = "Cari Mutabakat başarılı bir şekilde oluşturuldu.";
@@ -70,6 +71,12 @@ namespace Business.Contans
 
         // TermsAndCondition
         public static string AddedTermsAndCondition = "Sözleşme güncelleme işlemi başarılı.";
+    
+        // UserOperationClaim
+        
+        public static string AddedUserOperationClaim = "Kullanıcıya yetki tanımlaması yapıldı.";
+        public static string DeletedUserOperationClaim = "Kullanıcı yetkisi kaldırıldı.";
+        public static string UpdatedUserOperationClaim = "Kullanıcı yetkisi güncellendi.";
     
     }
 }

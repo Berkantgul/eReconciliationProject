@@ -3,6 +3,7 @@ using Autofac.Extras.DynamicProxy;
 using Business.Abstract;
 using Business.Concrete;
 using Castle.DynamicProxy;
+using Core.Entities;
 using Core.Utilities.Interceptions;
 using Core.Utilities.Security.JWT;
 using DataAccess.Abstract;
@@ -64,6 +65,13 @@ namespace Business.DependencyResolves.Autofac
 
             builder.RegisterType<ForgotPasswordManager>().As<IForgotPasswordService>();
             builder.RegisterType<EfForgotPasswordDal>().As<IForgotPasswordDal>();
+
+            builder.RegisterType<UserOperationClaimManager>().As<IUserOperationClaimService>();
+            builder.RegisterType<EfUserOperationClaimDal>().As<IUserOperationClaimDal>();
+
+
+            builder.RegisterType<OperationClaimManager>().As<IOperationClaimService>();
+            builder.RegisterType<EfOperationClaimDal>().As<IOperationClaimDal>();
 
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();

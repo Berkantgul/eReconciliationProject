@@ -50,7 +50,7 @@ namespace Business.Concrete
             return new SuccessDataResult<OperationClaim>(_operatinClaimDal.Get(i => i.Id == id));
         }
 
-        [SecuredOperations("OperationClaim.GetList")]
+       // [SecuredOperations("OperationClaim.GetList")]
         [PerformanceAspect(3)]
         [CacheAspect(60)]
         public IDataResult<List<OperationClaim>> GetList()

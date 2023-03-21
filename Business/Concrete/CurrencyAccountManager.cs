@@ -93,6 +93,11 @@ namespace Business.Concrete
         [CacheRemoveAspect("ICurrencyAccountService.Get")]
         public IResult Delete(CurrencyAccount currencyAccount)
         {
+            var result = _currencyAccountDal.CheckCurrencyAccountReconciliation(currencyAccount.Id);
+            if (result == false)
+            {
+                return new ErrorResult(Messages.AccountHaveReconciliaition);
+            }
             _currencyAccountDal.Delete(currencyAccount);
             return new SuccessResult(Messages.DeletedCurrencyAccount);
         }
@@ -112,12 +117,12 @@ namespace Business.Concrete
             return new SuccessDataResult<CurrencyAccount>(_currencyAccountDal.Get(i => i.Code == code && i.CompanyId == companyId));
         }
 
-        [PerformanceAspect(3)]
+        //[PerformanceAspect(10)]
         [SecuredOperations("CurrencyAccount.GetList,Admin")]
         [CacheAspect(60)]
         public IDataResult<List<CurrencyAccount>> GetList(int companyId)
         {
-            return new SuccessDataResult<List<CurrencyAccount>>(_currencyAccountDal.GetAll(p => p.CompanyId == companyId));
+            return new SuccessDataResult<List<CurrencyAccount>>(_currencyAccountDal.GetAll(p => p.CompanyId == companyId).OrderBy(p => p.Name).ToList());
         }
 
         [SecuredOperations("CurrencyAccount.Update,Admin")]

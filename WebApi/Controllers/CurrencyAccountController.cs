@@ -22,16 +22,18 @@ namespace WebApi.Controllers
             var result = _currencyAccountService.Add(currencyAccount);
             if (result.Success)
             {
-                return Ok();
+                return Ok(result);
             }
             return BadRequest(result.Message);
         }
 
         [HttpGet("getList")]
         public IActionResult GetList(int companyId)
+         
+        
         {
             var result = _currencyAccountService.GetList(companyId);
-            return Ok(result.Data);
+            return Ok(result);
         }
 
         [HttpPost("update")]
@@ -40,7 +42,7 @@ namespace WebApi.Controllers
             var result = _currencyAccountService.Update(currencyAccount);
             if (result.Success)
             {
-                return Ok(result.Message);
+                return Ok(result);
             }
             return BadRequest(result.Message);
         }
@@ -48,7 +50,7 @@ namespace WebApi.Controllers
         [HttpGet("get")]
         public IActionResult Get(int id)
         {
-            return Ok(_currencyAccountService.Get(id).Data);
+            return Ok(_currencyAccountService.Get(id));
         }
 
         [HttpPost("delete")]
@@ -57,7 +59,7 @@ namespace WebApi.Controllers
             var result = _currencyAccountService.Delete(currencyAccount);
             if (result.Success)
             {
-                return Ok(result.Message);
+                return Ok(result);
             }
             return BadRequest(result.Message);
         }
@@ -77,7 +79,7 @@ namespace WebApi.Controllers
                 var result = _currencyAccountService.AddToExcel(filePath, companyId);
                 if (result.Success)
                 {
-                    return Ok(result.Message);
+                    return Ok(result);
                 }
                 return BadRequest(result.Message);
             }
