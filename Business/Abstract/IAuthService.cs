@@ -15,7 +15,7 @@ namespace Business.Abstract
     {
         // User Kayıt
         IDataResult<UserCompanyDto> Register(UserForRegister userForRegister, string password, Company company);
-        IDataResult<User> RegisterSecondAccount(UserForRegister userForRegister, string password, int companyId);
+        IDataResult<List<UserReletionShipDto>> RegisterSecondAccount(UserForRegister userForRegister, string password, int companyId,int adminUserId);
         // User Login
         IDataResult<User> Login(UserForLogin userForLogin);
         // Kullanıcı var mı yok mu?

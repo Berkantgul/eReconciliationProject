@@ -51,11 +51,10 @@ namespace WebApi.Controllers
             {
                 return BadRequest(userExists.Message);
             }
-            var registerResult = _authService.RegisterSecondAccount(userForRegister, userForRegister.Password, userForRegister.CompanyId);
-            var result = _authService.CreateAccessToken(registerResult.Data, userForRegister.CompanyId);
-            if (result.Success)
+            var registerResult = _authService.RegisterSecondAccount(userForRegister, userForRegister.Password, userForRegister.CompanyId,userForRegister.AdminUserId);
+            if (registerResult.Success)
             {
-                return Ok(result);
+                return Ok(registerResult);
             }
             return BadRequest(registerResult.Message);
         }

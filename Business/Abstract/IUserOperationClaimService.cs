@@ -12,7 +12,7 @@ namespace Business.Abstract
     public interface IUserOperationClaimService
     {
         IResult Update(UserOperationClaim operationClaim);
-        IDataResult<List<UserOperationClaim>> GetList();
+        IDataResult<List<UserOperationClaim>> GetList(int userId,int companyId);
         IDataResult<UserOperationClaim> Get(int id);
         IResult Add(UserOperationClaim operationClaim);
         IDataResult<List<UserOperationClaimDto>> GetListDto(int userId, int companyId);

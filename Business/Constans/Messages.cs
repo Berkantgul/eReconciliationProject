@@ -21,6 +21,11 @@ namespace Business.Contans
         public static string ExistsAlreadyUser = "Böyle bir kişi zaten mevcut.";
         public static string ConfirmValue = "Mail onaylama işlemi başarılı.";
         public static string ChangedPassword = "Şifre başarılı bir şekilde güncellendi.";
+        public static string UpdatedUser = "Kullanıcı kaydı başarılı bir şekilde güncellendi.";
+        public static string ChangeStatus = "Kullanıcı durum güncellendi.";
+        public static string DeleteUserCompany = "Kullanıcının şirket ile ilişiği kesilmiştir.";
+        public static string AddedUserCompany = "Kullanıcının şirket ile bağlantısı oluşturulmuştur.";
+        public static string UserDelete = "Kullanıcı silme işlemi başarılı.";
 
         // Mail 
         public static string MailParameterUpdated = "Mail parametrelerini güncellendi.";

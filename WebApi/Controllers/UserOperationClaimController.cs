@@ -23,9 +23,9 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("getList")]
-        public IActionResult GetList()
+        public IActionResult GetList(int userId,int companyId)
         {
-            return Ok(_userOperationClaimService.GetList());
+            return Ok(_userOperationClaimService.GetList(userId, companyId));
         }
 
         [HttpGet("getListDto")]

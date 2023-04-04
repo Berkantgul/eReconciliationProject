@@ -73,6 +73,11 @@ namespace Business.DependencyResolves.Autofac
             builder.RegisterType<OperationClaimManager>().As<IOperationClaimService>();
             builder.RegisterType<EfOperationClaimDal>().As<IOperationClaimDal>();
 
+            builder.RegisterType<UserReletionShipManager>().As<IUserReletionShipService>();
+            builder.RegisterType<EfUserReletionShipDal>().As<IUserReletionShipDal>();
+
+            builder.RegisterType<UserCompanyManager>().As<IUserCompanyService>();
+            builder.RegisterType<EfUserCompanyDal>().As<IUserCompanyDal>();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()

@@ -30,9 +30,10 @@ namespace Business.Concrete
         private readonly IMailTemplateService _mailTemplateService;
         private readonly IUserOperationClaimService _userOperationClaimService;
         private readonly IOperationClaimService _operationClaimService;
+        private readonly IUserReletionShipService _userReletionShipService;
 
 
-        public AuthManager(IUserService userService, ITokenHelper tokenHelper, ICompanyService companyService, IMailService mailService, IMailParameterService mailParameterService, IMailTemplateService mailTemplateService,IUserOperationClaimService userOperationClaimService,IOperationClaimService operationClaimService)
+        public AuthManager(IUserService userService, ITokenHelper tokenHelper, ICompanyService companyService, IMailService mailService, IMailParameterService mailParameterService, IMailTemplateService mailTemplateService, IUserOperationClaimService userOperationClaimService, IOperationClaimService operationClaimService, IUserReletionShipService userReletionShipService)
         {
             _userService = userService;
             _tokenHelper = tokenHelper;
@@ -42,6 +43,7 @@ namespace Business.Concrete
             _mailTemplateService = mailTemplateService;
             _userOperationClaimService = userOperationClaimService;
             _operationClaimService = operationClaimService;
+            _userReletionShipService = userReletionShipService;
         }
 
         public IResult CompanyExists(Company company)
@@ -179,7 +181,8 @@ namespace Business.Concrete
             _userService.Update(user);
         }
 
-        public IDataResult<User> RegisterSecondAccount(UserForRegister userForRegister, string password, int companyId)
+        [TransactionScopeAspect]
+        public IDataResult<List<UserReletionShipDto>> RegisterSecondAccount(UserForRegister userForRegister, string password, int companyId, int adminUserId)
         {
             byte[] passworhHash, passwordSalt;
             HashingHelper.CreatePasswordHash(password, out passworhHash, out passwordSalt);
@@ -216,14 +219,24 @@ namespace Business.Concrete
 
             }
 
+            UserReletionShip userReletionShip = new UserReletionShip
+            {
+                AdminUserId=adminUserId,
+                UserUserId = user.Id
+            };
+
+            _userReletionShipService.Add(userReletionShip);
+
+            var result = _userReletionShipService.GetListDto(adminUserId).Data;
+
             SendMail(user);
-            return new SuccessDataResult<User>(user, Messages.UserRegistered);
+            return new SuccessDataResult<List<UserReletionShipDto>>(result, Messages.UserRegistered);
         }
 
         public IResult Update(User user)
         {
             _userService.Update(user);
-            return new SuccessResult(Messages.ConfirmValue);
+            return new SuccessResult(Messages.ChangeStatus);
         }
 
         public IResult UserExists(string email)
