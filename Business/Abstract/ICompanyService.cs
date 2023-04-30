@@ -21,5 +21,6 @@ namespace Business.Abstract
         IResult AddCompanyAndUser(CompanyDto companyDto);
         IResult Update(Company company);
         IDataResult<Company> GetById(int id);
+        IDataResult<List<Company>> GetCompanyByUserId(int userId);
     }
 }

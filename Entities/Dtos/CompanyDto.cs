@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace Entities.Dtos
 {
-    public class CompanyDto : IDto
+    public class CompanyDto : Company, IDto
     {
-        public Company company { get; set; }
         public int userId { get; set; }
     }
 }

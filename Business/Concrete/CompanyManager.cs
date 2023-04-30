@@ -39,8 +39,20 @@ namespace Business.Concrete
         [CacheRemoveAspect("ICompanyService.Get")]
         public IResult AddCompanyAndUser(CompanyDto companyDto)
         {
-            _companyDal.Add(companyDto.company);
-            _companyDal.UserCompanyAdd(companyDto.userId, companyDto.company.Id);
+            Company company = new Company()
+            {
+                Id = companyDto.Id,
+                Name = companyDto.Name,
+                TaxDepartment = companyDto.TaxDepartment,
+                TaxIdNumber = companyDto.TaxIdNumber,
+                IdentityNumber = companyDto.IdentityNumber,
+                Address = companyDto.Address,
+                AddedAt = companyDto.AddedAt,
+                IsActive = companyDto.IsActive
+            };
+
+            _companyDal.Add(company);
+            _companyDal.UserCompanyAdd(companyDto.userId, company.Id);
             return new SuccessResult(Messages.AddedCompany);
         }
 
@@ -72,6 +84,12 @@ namespace Business.Concrete
             return new SuccessDataResult<UserCompany>(_companyDal.GetCompany(userId));
         }
 
+        [CacheAspect(60)]
+        public IDataResult<List<Company>> GetCompanyByUserId(int userId)
+        {
+            return new SuccessDataResult<List<Company>>(_companyDal.GetCompanyByUserId(userId));
+        }
+
         [PerformanceAspect(3)]
         [SecuredOperations("Company.Add,Admin")]
         [CacheRemoveAspect("ICompanyService.Get")]
@@ -87,5 +105,7 @@ namespace Business.Concrete
             _companyDal.UserCompanyAdd(userId, companyId);
             return new SuccessResult();
         }
+    
+    
     }
 }

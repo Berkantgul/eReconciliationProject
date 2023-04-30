@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Entities.Concrete;
 using Entities.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,13 +13,16 @@ namespace WebApi.Controllers
         private readonly IUserService _userService;
         private readonly IAuthService _authService;
         private readonly IUserReletionShipService _userReletionShipService;
+        private readonly IUserThemeOptionService _userThemeOptionService;
 
-        public UserController(IUserService userService, IAuthService authService,IUserReletionShipService userReletionShipService)
+        public UserController(IUserService userService, IAuthService authService,IUserReletionShipService userReletionShipService,IUserThemeOptionService userThemeOptionService)
         {
             _userService = userService;
             _authService = authService;
             _userReletionShipService = userReletionShipService;
+            _userThemeOptionService = userThemeOptionService;
         }
+
 
         [HttpGet("getUserList")]
         public IActionResult GetUserList(int companyId)
@@ -164,6 +168,28 @@ namespace WebApi.Controllers
         public IActionResult GetAdminCompaniesForUser(int adminUserId,int userUserId)
         {
             var result = _userService.GetAdminCompaniesForUser(adminUserId, userUserId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result.Message);
+        }
+
+        [HttpGet("getUserTheme")]
+        public IActionResult GetUserTheme(int userId)
+        {
+            var result = _userThemeOptionService.GetByUserId(userId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result.Message);
+        }
+
+        [HttpPost("changeTheme")]
+        public IActionResult ChangeTheme(UserTheme userTheme)
+        {
+            var result = _userThemeOptionService.Update(userTheme);
             if (result.Success)
             {
                 return Ok(result);

@@ -79,6 +79,9 @@ namespace Business.DependencyResolves.Autofac
             builder.RegisterType<UserCompanyManager>().As<IUserCompanyService>();
             builder.RegisterType<EfUserCompanyDal>().As<IUserCompanyDal>();
 
+            builder.RegisterType<UserThemeOptionManager>().As<IUserThemeOptionService>();
+            builder.RegisterType<EfUserThemeOptionDal>().As<IUserThemeOptionDal>();
+
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
               .EnableInterfaceInterceptors(new ProxyGenerationOptions()

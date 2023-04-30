@@ -31,5 +31,6 @@ namespace DataAccess.Concrete.EntityFramework.Context
         public DbSet<TermsAndCondition> TermsAndConditions { get; set; }
         public DbSet<ForgotPassword> ForgotPasswords { get; set; }
         public DbSet<UserReletionShip> UserReletionShips { get; set; }
+        public DbSet<UserTheme> UserThemes { get; set; }
     }
 }

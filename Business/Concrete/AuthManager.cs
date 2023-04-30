@@ -31,9 +31,10 @@ namespace Business.Concrete
         private readonly IUserOperationClaimService _userOperationClaimService;
         private readonly IOperationClaimService _operationClaimService;
         private readonly IUserReletionShipService _userReletionShipService;
+        private readonly IUserThemeOptionService _userThemeOptionService;
 
 
-        public AuthManager(IUserService userService, ITokenHelper tokenHelper, ICompanyService companyService, IMailService mailService, IMailParameterService mailParameterService, IMailTemplateService mailTemplateService, IUserOperationClaimService userOperationClaimService, IOperationClaimService operationClaimService, IUserReletionShipService userReletionShipService)
+        public AuthManager(IUserService userService, ITokenHelper tokenHelper, ICompanyService companyService, IMailService mailService, IMailParameterService mailParameterService, IMailTemplateService mailTemplateService, IUserOperationClaimService userOperationClaimService, IOperationClaimService operationClaimService, IUserReletionShipService userReletionShipService, IUserThemeOptionService userThemeOptionService)
         {
             _userService = userService;
             _tokenHelper = tokenHelper;
@@ -44,6 +45,7 @@ namespace Business.Concrete
             _userOperationClaimService = userOperationClaimService;
             _operationClaimService = operationClaimService;
             _userReletionShipService = userReletionShipService;
+            _userThemeOptionService = userThemeOptionService;
         }
 
         public IResult CompanyExists(Company company)
@@ -146,6 +148,15 @@ namespace Business.Concrete
 
             }
 
+            UserTheme userTheme = new UserTheme()
+            {
+                UserId = user.Id,
+                SidenavColor = "primary",
+                SidenavType = "dark"
+            };
+            _userThemeOptionService.Update(userTheme);
+
+
             // Onay maili 
             SendMail(user);
 
@@ -221,9 +232,18 @@ namespace Business.Concrete
 
             UserReletionShip userReletionShip = new UserReletionShip
             {
-                AdminUserId=adminUserId,
+                AdminUserId = adminUserId,
                 UserUserId = user.Id
             };
+
+
+            UserTheme userTheme = new UserTheme()
+            {
+                UserId = user.Id,
+                SidenavColor = "primary",
+                SidenavType = "dark"
+            };
+            _userThemeOptionService.Update(userTheme);
 
             _userReletionShipService.Add(userReletionShip);
 

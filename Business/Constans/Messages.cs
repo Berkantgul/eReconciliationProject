@@ -26,6 +26,7 @@ namespace Business.Contans
         public static string DeleteUserCompany = "Kullanıcının şirket ile ilişiği kesilmiştir.";
         public static string AddedUserCompany = "Kullanıcının şirket ile bağlantısı oluşturulmuştur.";
         public static string UserDelete = "Kullanıcı silme işlemi başarılı.";
+        public static string UpdatedUserTheme = "Arayüz başarılı bir şekilde güncellendi.";
 
         // Mail 
         public static string MailParameterUpdated = "Mail parametrelerini güncellendi.";

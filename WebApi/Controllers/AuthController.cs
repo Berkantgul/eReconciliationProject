@@ -71,17 +71,17 @@ namespace WebApi.Controllers
             {
                 if (userToLogin.Data.MailConfirm)
                 {
-                    var userCompany = _authService.GetCompany(userToLogin.Data.Id).Data;
-                    var result = _authService.CreateAccessToken(userToLogin.Data, userCompany.CompanyId);
+                    var usercompany = _authService.GetCompany(userToLogin.Data.Id).Data;
+                    var result = _authService.CreateAccessToken(userToLogin.Data, usercompany.CompanyId);
                     if (result.Success)
                     {
                         return Ok(result);
                     }
                     return BadRequest(result);
                 }
-                return BadRequest("Gelen onay mailini cevaplamalısınız. Mail adresinizi onaylamadan sisteme giriş yapamazsınız!");
+                return BadRequest("gelen onay mailini cevaplamalısınız. mail adresinizi onaylamadan sisteme giriş yapamazsınız!");
             }
-            return BadRequest("Kullanıcınız pasif durumda, aktif etmek için yöneticinizle danışın.");
+            return BadRequest("Hata");
         }
 
         [HttpGet("confirmuser")]
@@ -197,6 +197,18 @@ namespace WebApi.Controllers
             userResult.PasswordSalt = passwordSalt;
 
             var result = _authService.ChangePassword(userResult);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result.Message);
+        }
+
+        [HttpGet("changeCompany")]
+        public IActionResult ChangeCompany(int userId,int companyId)
+        {
+            var user = _authService.GetById(userId).Data;
+            var result = _authService.CreateAccessToken(user, companyId);
             if (result.Success)
             {
                 return Ok(result);
